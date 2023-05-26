@@ -2,7 +2,7 @@ apiVersion: agent.k8s.elastic.co/v1alpha1
 kind: Agent
 metadata:
   name: elastic-agent-quickstart
-  namespace: full-demo
+  namespace: test
 spec:
   version: 8.8.0
   kibanaRef:
@@ -17,3 +17,7 @@ spec:
         serviceAccountName: elastic-agent
         automountServiceAccountToken: true
         securityContext:
+          runAsUser: 0
+        volumes:
+        - name: agent-data ## Here
+          emptyDir: {}

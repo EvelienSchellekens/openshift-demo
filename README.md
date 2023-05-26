@@ -23,6 +23,13 @@ oc apply -f elasticsearch.yml
 
 oc apply -f kibana.yml
 
+oc create serviceaccount elastic-agent -n test
+oc adm policy add-scc-to-user hostaccess -z elastic-agent -n test
+oc adm policy add-scc-to-user hostmount-anyuid -z elastic-agent -n test
+oc adm policy add-scc-to-user privileged -z elastic-agent -n test
+
+oc apply -f fleet.yml
+
 oc apply -f fleet.yml
 
 oc apply -f agent.yml
