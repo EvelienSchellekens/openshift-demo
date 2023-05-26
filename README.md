@@ -30,9 +30,13 @@ oc adm policy add-scc-to-user privileged -z elastic-agent -n test
 
 oc apply -f fleet.yml
 
-oc apply -f fleet.yml
-
 oc apply -f agent.yml
+
+oc apply -f apm-server.yml
+
+oc apply -f pet-clinic.yml
+
+oc apply -f pet-clinic-service.yml
 ```
 
 ## Access Elastic components
