@@ -39,6 +39,18 @@ oc apply -f pet-clinic.yml
 oc apply -f pet-clinic-service.yml
 ```
 
+Kube-state-metrics deployment:
+
+```shell
+helm install --set namespaceOverride=test kube-state-metrics-test prometheus-community/kube-state-metrics -n test
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+oc adm policy add-scc-to-user hostaccess -z kube-state-metrics-test -n test
+oc adm policy add-scc-to-user hostmount-anyuid -z kube-state-metrics-test -n test
+oc adm policy add-scc-to-user privileged -z kube-state-metrics-test -n test
+```
+
 ## Access Elastic components
 
 ```shell
