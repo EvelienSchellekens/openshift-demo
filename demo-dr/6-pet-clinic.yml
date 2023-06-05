@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment 
 metadata: 
   name: petclinic 
-  namespace: test
+  namespace: demo-dr
   labels: 
     app: petclinic 
     service: petclinic 
@@ -42,7 +42,7 @@ spec:
         - name: ELASTIC_APM_APPLICATION_PACKAGES 
           value: "org.springframework.samples.petclinic" 
         - name: ELASTIC_APM_ENVIRONMENT 
-          value: test 
+          value: demo-dr 
         - name: ELASTIC_APM_VERIFY_SERVER_CERT
           value: "false"
         - name: ELASTIC_APM_LOG_LEVEL 
@@ -54,3 +54,20 @@ spec:
               key: secret-token 
         - name: JAVA_TOOL_OPTIONS 
           value: -javaagent:/elastic/apm/agent/elastic-apm-agent.jar
+---
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: petclinic 
+  namespace: demo-dr 
+  labels: 
+    app: petclinic 
+spec: 
+  type: NodePort 
+  ports: 
+  - protocol: TCP 
+    port: 8080 
+    targetPort: 8080 
+    nodePort: 30001 
+  selector: 
+    service: petclinic

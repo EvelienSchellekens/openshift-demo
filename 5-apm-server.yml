@@ -2,7 +2,7 @@ apiVersion: apm.k8s.elastic.co/v1
 kind: ApmServer
 metadata:
   name: apm-server-quickstart
-  namespace: test
+  namespace: demo
 spec:
   version: 8.8.0
   count: 1
@@ -10,12 +10,12 @@ spec:
     name: "elasticsearch-quickstart"
   podTemplate:
     spec:
-      serviceAccountName: apm-server
+      serviceAccountName: elastic-agent
       automountServiceAccountToken: true
       securityContext:
         runAsUser: 0
       volumes:
-      - name: apm-server-data ## Here
+      - name: apm-server-data
         emptyDir: {}
 ---
 apiVersion: route.openshift.io/v1

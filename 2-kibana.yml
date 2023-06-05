@@ -2,15 +2,15 @@ apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
   name: kibana-quickstart
-  namespace: test
+  namespace: demo
 spec:
   version: 8.8.0
   count: 1
   elasticsearchRef:
     name: elasticsearch-quickstart
   config:
-    xpack.fleet.agents.elasticsearch.hosts: ["https://elasticsearch-quickstart-es-http.test.svc:9200"]
-    xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-quickstart-agent-http.test.svc:8220"]
+    xpack.fleet.agents.elasticsearch.hosts: ["https://elasticsearch-quickstart-es-http.demo.svc:9200"]
+    xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-quickstart-agent-http.demo.svc:8220"]
     xpack.fleet.packages:
       - name: system
         version: latest
@@ -21,7 +21,7 @@ spec:
     xpack.fleet.agentPolicies:
       - name: Fleet Server on ECK policy
         id: eck-fleet-server
-        namespace: test
+        namespace: demo
         monitoring_enabled:
           - logs
           - metrics
@@ -33,7 +33,7 @@ spec:
             name: fleet_server
       - name: Elastic Agent on ECK policy
         id: eck-agent
-        namespace: test
+        namespace: demo
         monitoring_enabled:
           - logs
           - metrics

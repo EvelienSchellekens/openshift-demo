@@ -1,17 +1,19 @@
 apiVersion: agent.k8s.elastic.co/v1alpha1
 kind: Agent
 metadata:
-  name: elastic-agent-quickstart
-  namespace: test
+  name: fleet-server-quickstart
+  namespace: demo-dr
 spec:
   version: 8.8.0
   kibanaRef:
     name: kibana-quickstart
-  fleetServerRef:
-    name: fleet-server-quickstart
+  elasticsearchRefs:
+  - name: elasticsearch-quickstart
   mode: fleet
-  policyID: eck-agent
-  daemonSet:
+  fleetServerEnabled: true
+  policyID: eck-fleet-server
+  deployment:
+    replicas: 1
     podTemplate:
       spec:
         serviceAccountName: elastic-agent
@@ -19,5 +21,5 @@ spec:
         securityContext:
           runAsUser: 0
         volumes:
-        - name: agent-data ## Here
+        - name: agent-data
           emptyDir: {}
