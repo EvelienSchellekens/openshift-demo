@@ -1,5 +1,9 @@
 # Unlocking the Power of Elastic on OpenShift
 
+> This is a DEMO, don't use this code in production please. :)
+
+> Documentation on running ECK on OpenShift is located [here](https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-openshift.html).
+
 ## Install OC tools
 
 Download oc zip file
